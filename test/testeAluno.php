@@ -1,13 +1,16 @@
 <?php
+    require_once "../model/aluno.php";
+    require_once "../model/alunoDao.php";
     require_once "../model/situacao.php";
     require_once "../model/situacaoDao.php";
     require_once "../db/conexao.php";
 
     $conexao = new Conexao();
     $situacaoDao = new SituacaoDao($conexao);
+    $alunoDao = new AlunoDao($conexao);
 
-    // $situacao = new Situacao("Exemplo");
-    // $situacaoDao->inserir($situacao);
     $situacao = $situacaoDao->pesquisarNome('Transferido');
-    print_r($situacao);
+    $aluno = new Aluno($situacao, 'AlunoTeste1');
+    
+    $alunoDao->inserir($aluno);
 ?>
