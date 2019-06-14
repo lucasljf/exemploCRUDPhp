@@ -13,5 +13,25 @@
             $stmt->bindValue(':nome', $aluno->__get('nome'));
             $stmt->execute();
         }
+
+        public function listarTudo() {
+            $sql = 'SELECT * FROM aluno';
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->execute();
+
+            $resultados = $stmt->fetchAll(PDO::FETCH_OBJ); // array de aluno?
+            $alunos = array();
+
+            $conexao = new Conexao();
+            $situacaoDao = new SituacaoDao($conexao);
+            foreach ($resultados as $id => $objeto) {
+                $situacao = $situacaoDao->pesquisarId($objeto->idSituacao);
+                $aluno = new Aluno($situacao, $objeto->nome);
+                $aluno->__set('id', $objeto->id);
+                $aluno->__set('dataCadastro', $objeto->dataCadastro);
+                $alunos[] = $aluno;
+            }
+            return $alunos;
+        }
     }
 ?>

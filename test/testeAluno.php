@@ -13,4 +13,9 @@
     $aluno = new Aluno($situacao, 'AlunoTeste1');
     
     $alunoDao->inserir($aluno);
+
+    $alunos = $alunoDao->listarTudo();
+    echo "<pre>";
+    print_r($alunos);
+    echo "</pre>";
 ?>

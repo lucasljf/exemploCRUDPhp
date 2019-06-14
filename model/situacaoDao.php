@@ -25,5 +25,17 @@
             $situacao->__set('id', $resultado->id);
             return $situacao;
         }
+
+        public function pesquisarId($id) {
+            $sql = 'SELECT * FROM situacao WHERE id = :id';
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+
+            $resultado = $stmt->fetch(PDO::FETCH_OBJ);
+            $situacao = new Situacao($resultado->nome);
+            $situacao->__set('id', $resultado->id);
+            return $situacao;
+        }
     }
 ?>
