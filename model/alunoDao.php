@@ -1,4 +1,8 @@
 <?php
+    require_once "situacaoDao.php";
+    require_once "situacao.php";
+    require_once "aluno.php";
+
     class AlunoDao {
         private $conexao;
 
@@ -32,6 +36,24 @@
                 $alunos[] = $aluno;
             }
             return $alunos;
+        }
+        
+        public function pesquisarId($id) {
+            $sql = 'SELECT * FROM aluno WHERE id = :id';
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            
+            $resultado = $stmt->fetch(PDO::FETCH_OBJ);
+            
+            $conexao = new Conexao();
+            $situacaoDao = new SituacaoDao($conexao);
+            
+            $situacao = $situacaoDao->pesquisarId($resultado->idSituacao);
+            $aluno = new Aluno($situacao, $resultado->nome);
+            $aluno->__set('id', $resultado->id);
+            $aluno->__set('dataCadastro', $resultado->dataCadastro);
+            return $aluno;            
         }
     }
 ?>

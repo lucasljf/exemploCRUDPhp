@@ -10,7 +10,7 @@
     <h4>Menu</h4>
     <a href="#">Lista de situações</a> <br>
     <a href="#">Adicionar situação</a> <br>
-    <a href="#">Lista de alunos</a> <br>
+    <a href="listaAlunos.php">Lista de alunos</a> <br>
     <a href="#">Adicionar Aluno</a> <br>
 </body>
 </html>
