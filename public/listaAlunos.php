@@ -37,5 +37,7 @@
             }
         ?>
     </table>
+    <br>
+    <a href="adicionarAluno.php">Adicionar novo aluno...</a>
 </body>
 </html>
