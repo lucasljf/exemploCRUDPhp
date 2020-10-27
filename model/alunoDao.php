@@ -18,6 +18,21 @@
             $stmt->execute();
         }
 
+        public function deletar(Aluno $aluno) {
+            $sql = 'DELETE FROM aluno WHERE id = :id';
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':id', $aluno->__get('id'));
+            $stmt->execute();
+        }
+
+        public function alterar(Aluno $aluno) {
+            $sql = 'UPDATE aluno SET nome = :nome WHERE id = :id';
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':nome', $aluno->__get('nome'));
+            $stmt->bindValue(':id', $aluno->__get('id'));
+            $stmt->execute();
+        }
+
         public function listarTudo() {
             $sql = 'SELECT * FROM aluno';
             $stmt = $this->conexao->prepare($sql);
