@@ -12,6 +12,7 @@ db:
     restart: always
     volumes: 
         - /var/lib/mysql
+        - ./db/banco.sql:/docker-entrypoint-initdb.d/banco.sql
     environment:
         - MYSQL_ROOT_PASSWORD=123456789
         - MYSQL_DATABASE=projetoAlunos

@@ -1,5 +1,5 @@
-CREATE DATABASE projetoAlunos;
-USE projetoAlunos;
+-- CREATE DATABASE projetoAlunos;
+-- USE projetoAlunos;
 
 CREATE TABLE situacao (
     id INT NOT NULL AUTO_INCREMENT,
