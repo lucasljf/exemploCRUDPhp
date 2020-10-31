@@ -70,5 +70,26 @@
             $aluno->__set('dataCadastro', $resultado->dataCadastro);
             return $aluno;            
         }
+
+        public function pesquisarNome($nome) {
+            $sql = 'SELECT * FROM aluno WHERE nome like :nome';
+            $stmt = $this->conexao->prepare($sql);
+            $stmt ->bindValue(':nome', '%'. $nome . '%');
+            $stmt->execute();
+
+            $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
+            $alunos = array();
+
+            $conexao = new Conexao();
+            $situacaoDao = new SituacaoDao($conexao);
+            foreach ($resultados as $resultado) {
+                $situacao = $situacaoDao->pesquisarId($resultado->idSituacao);
+                $aluno = new Aluno($situacao, $resultado->nome);
+                $aluno->__set('id', $resultado->id);
+                $aluno->__set('dataCadastro', $resultado->dataCadastro);
+                $alunos[] = $aluno;
+            }
+            return $alunos;
+        }
     }
 ?>

@@ -43,4 +43,10 @@
     echo "<pre>";
     print_r($alunoAlt);
     echo "</pre>";
+
+    // Pesquisa aproximada.
+    $alunoNome = $alunoDao->pesquisarNome("la");
+    echo "<pre>";
+    print_r($alunoNome);
+    echo "</pre>";
 ?>
