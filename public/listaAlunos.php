@@ -15,6 +15,7 @@
             <th>Nome</th>
             <th>Data de cadastro</th>
             <th>Nova Turma</th>
+            <th>Editar nome</th>
         </tr>
         <?php
             require_once "../model/alunoDao.php";
@@ -31,7 +32,8 @@
                 echo "<td>" . $aluno->__get('nome') . "</td>";
                 echo "<td>" . $aluno->__get('dataCadastro') . "</td>";
             ?>
-                <td><a href="criarTurma.php?id=<?= $aluno->__get('id')?>">Adicionar</a></td>
+                <td><a href="criarTurma.php?id=<?= $aluno->__get('id')?>">Adicionar turma</a></td>
+                <td><a href="adicionarAluno.php?id=<?= $aluno->__get('id')?>">Alterar nome</a></td>
             <?php
                 echo "</tr>";
             }
