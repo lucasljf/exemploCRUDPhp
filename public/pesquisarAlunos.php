@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lista de Alunos</title>
+    <title>Pesquisa de Alunos</title>
 </head>
 <body>
-    <h4>Lista de Alunos</h4>
+    <h4>Pesquisa de Alunos</h4>
+    
+    <form action="pesquisarAlunos.php" method="get">
+        Nome: <br>
+        <input type="text" name="nome"> <br><br>
+        <input type="submit" value="Pesquisar">
+    </form>
+    <a href="index.php">Início...</a>
+
+    <?php
+        if (isset($_GET['nome'])) {
+    ?>
+    <h4>Resultados:</h4>
     <table border='1'>
         <tr>
             <th>ID</th>
@@ -21,10 +33,10 @@
         <?php
             require_once "../model/alunoDao.php";
             require_once "../db/conexao.php";
-
+            
             $conexao = new Conexao();
             $alunoDao = new AlunoDao($conexao);
-            $alunos = $alunoDao->listarTudo();
+            $alunos = $alunoDao->pesquisarNome($_GET['nome']);
             
             foreach ($alunos as $key => $aluno) {
                 echo "<tr>";
@@ -32,17 +44,19 @@
                 echo "<td>" . $aluno->__get('situacao')->__get('nome') . "</td>";
                 echo "<td>" . $aluno->__get('nome') . "</td>";
                 echo "<td>" . $aluno->__get('dataCadastro') . "</td>";
-            ?>
+                ?>
                 <td><a href="criarTurma.php?id=<?= $aluno->__get('id')?>">Adicionar turma</a></td>
                 <td><a href="adicionarAluno.php?id=<?= $aluno->__get('id')?>">Alterar nome</a></td>
                 <td><a href="deletarAluno.php?id=<?= $aluno->__get('id')?>">Deletar aluno</a></td>
             <?php
                 echo "</tr>";
             }
-        ?>
+            ?>
     </table>
     <br>
-    <a href="adicionarAluno.php">Adicionar novo aluno...</a> <br>
-    <a href="index.php">Início...</a>
+    <a href="adicionarAluno.php">Adicionar novo aluno...</a>
+    <?php
+        }
+    ?>
 </body>
 </html>
