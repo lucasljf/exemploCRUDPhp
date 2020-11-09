@@ -16,6 +16,9 @@
             $stmt->bindValue(':idSituacao', $aluno->__get('situacao')->__get('id'));
             $stmt->bindValue(':nome', $aluno->__get('nome'));
             $stmt->execute();
+
+            $aluno->__set('id', $this->conexao->lastInsertId());
+            return $aluno;
         }
 
         public function deletar(Aluno $aluno) {

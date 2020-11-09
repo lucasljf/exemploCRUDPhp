@@ -12,7 +12,11 @@
     $situacao = $situacaoDao->pesquisarNome('Transferido');
     $aluno = new Aluno($situacao, 'AlunoTeste1');
     
-    // $alunoDao->inserir($aluno);
+    // atribuição após inserção no BD
+    $aluno = $alunoDao->inserir($aluno);
+    echo "<pre>";
+    print_r($aluno);
+    echo "</pre>";
 
     // $alunos = $alunoDao->listarTudo();
     // echo "<pre>";
